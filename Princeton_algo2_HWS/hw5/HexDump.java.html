@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang = "en">
+
+<head>
+
+<link rel="icon"          href="http://algs4.cs.princeton.edu/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="http://algs4.cs.princeton.edu/favicon.ico" type="image/x-icon">
+<link rel="stylesheet"    href="http://algs4.cs.princeton.edu/java.css" type="text/css">
+
+<title>HexDump.java</title>
+
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta NAME="AUTHOR" CONTENT="Robert Sedgewick and Kevin Wayne">
+<meta NAME="DESCRIPTION" CONTENT="HexDump code in Java">
+<meta NAME="TITLE" CONTENT="HexDump code in Java">
+<meta NAME="KEYWORDS" CONTENT="HexDump,java,programming,computer science,algorithm,data structure,program,code">
+<meta NAME="ROBOTS" CONTENT="INDEX,FOLLOW">
+
+</head>
+
+
+<body>
+<center><h1>HexDump.java</h1></center><p><br>
+
+Below is the syntax highlighted version of <a href = "HexDump.java">HexDump.java</a>
+from <a href = "http://algs4.cs.princeton.edu/55compression">&#167;5.5 Data Compression</a>.
+&nbsp; Here is the <a href = "http://algs4.cs.princeton.edu/code/javadoc/HexDump.html">Javadoc</a>.
+<p><br>
+
+<!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span class="comment">/*************************************************************************</span>
+<span class="comment"> *  Compilation:  javac HexDump.java</span>
+<span class="comment"> *  Execution:    java HexDump &lt; file</span>
+<span class="comment"> *  Dependencies: BinaryStdIn.java</span>
+<span class="comment"> *  Data file:    </span><span class="url">http://introcs.cs.princeton.edu/stdlib/abra.txt</span>
+<span class="comment"> *  </span>
+<span class="comment"> *  Reads in a binary file and writes out the bytes in hex, 16 per line.</span>
+<span class="comment"> *</span>
+<span class="comment"> *  % more abra.txt</span>
+<span class="comment"> *  ABRACADABRA!</span>
+<span class="comment"> *</span>
+<span class="comment"> *  % java HexDump 16 &lt; abra.txt</span>
+<span class="comment"> *  41 42 52 41 43 41 44 41 42 52 41 21</span>
+<span class="comment"> *  96 bits</span>
+<span class="comment"> *</span>
+<span class="comment"> *</span>
+<span class="comment"> *  Remark</span>
+<span class="comment"> *  --------------------------</span>
+<span class="comment"> *   - Similar to the Unix utilities od (octal dump) or hexdump (hexadecimal dump).</span>
+<span class="comment"> *</span>
+<span class="comment"> *  % od -t x1 &lt; abra.txt </span>
+<span class="comment"> *  0000000 41 42 52 41 43 41 44 41 42 52 41 21</span>
+<span class="comment"> *  0000014</span>
+<span class="comment"> *</span>
+<span class="comment"> *************************************************************************/</span>
+
+<span class="keyword">public</span><span class="normal"> </span><span class="keyword">class</span><span class="normal"> </span><span class="classname">HexDump</span><span class="normal"> </span><span class="cbracket">{</span>
+
+<span class="normal">    </span><span class="keyword">public</span><span class="normal"> </span><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">main</span><span class="symbol">(</span><span class="normal">String</span><span class="symbol">[]</span><span class="normal"> args</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="type">int</span><span class="normal"> BYTES_PER_LINE </span><span class="symbol">=</span><span class="normal"> </span><span class="number">16</span><span class="symbol">;</span>
+<span class="normal">        </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">args</span><span class="symbol">.</span><span class="normal">length </span><span class="symbol">==</span><span class="normal"> </span><span class="number">1</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            BYTES_PER_LINE </span><span class="symbol">=</span><span class="normal"> Integer</span><span class="symbol">.</span><span class="function">parseInt</span><span class="symbol">(</span><span class="normal">args</span><span class="symbol">[</span><span class="number">0</span><span class="symbol">]);</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+
+<span class="normal">        </span><span class="type">int</span><span class="normal"> i</span><span class="symbol">;</span>
+<span class="normal">        </span><span class="keyword">for</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">i </span><span class="symbol">=</span><span class="normal"> </span><span class="number">0</span><span class="symbol">;</span><span class="normal"> </span><span class="symbol">!</span><span class="normal">BinaryStdIn</span><span class="symbol">.</span><span class="function">isEmpty</span><span class="symbol">();</span><span class="normal"> i</span><span class="symbol">++)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">BYTES_PER_LINE </span><span class="symbol">==</span><span class="normal"> </span><span class="number">0</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span><span class="normal"> BinaryStdIn</span><span class="symbol">.</span><span class="function">readChar</span><span class="symbol">();</span><span class="normal"> </span><span class="keyword">continue</span><span class="symbol">;</span><span class="normal"> </span><span class="cbracket">}</span>
+<span class="normal">            </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">i </span><span class="symbol">==</span><span class="normal"> </span><span class="number">0</span><span class="symbol">)</span><span class="normal"> StdOut</span><span class="symbol">.</span><span class="function">printf</span><span class="symbol">(</span><span class="string">""</span><span class="symbol">);</span>
+<span class="normal">            </span><span class="keyword">else</span><span class="normal"> </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">i </span><span class="symbol">%</span><span class="normal"> BYTES_PER_LINE </span><span class="symbol">==</span><span class="normal"> </span><span class="number">0</span><span class="symbol">)</span><span class="normal"> StdOut</span><span class="symbol">.</span><span class="function">printf</span><span class="symbol">(</span><span class="string">"</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> i</span><span class="symbol">);</span>
+<span class="normal">            </span><span class="keyword">else</span><span class="normal"> StdOut</span><span class="symbol">.</span><span class="function">print</span><span class="symbol">(</span><span class="string">" "</span><span class="symbol">);</span>
+<span class="normal">            </span><span class="type">char</span><span class="normal"> c </span><span class="symbol">=</span><span class="normal"> BinaryStdIn</span><span class="symbol">.</span><span class="function">readChar</span><span class="symbol">();</span>
+<span class="normal">            StdOut</span><span class="symbol">.</span><span class="function">printf</span><span class="symbol">(</span><span class="string">"%02x"</span><span class="symbol">,</span><span class="normal"> c </span><span class="symbol">&amp;</span><span class="normal"> </span><span class="number">0xff</span><span class="symbol">);</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+<span class="normal">        </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">BYTES_PER_LINE </span><span class="symbol">!=</span><span class="normal"> </span><span class="number">0</span><span class="symbol">)</span><span class="normal"> StdOut</span><span class="symbol">.</span><span class="function">println</span><span class="symbol">();</span>
+<span class="normal">        StdOut</span><span class="symbol">.</span><span class="function">println</span><span class="symbol">((</span><span class="normal">i</span><span class="symbol">*</span><span class="number">8</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">+</span><span class="normal"> </span><span class="string">" bits"</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="cbracket">}</span>
+</tt></pre>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10811519-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+<p><br><address><small>
+Copyright &copy; 2002&ndash;2010, Robert Sedgewick and Kevin Wayne.
+<br>Last updated: Thu Oct 10 16:09:52 EDT 2013.
+</small></address>
+
+</html>
